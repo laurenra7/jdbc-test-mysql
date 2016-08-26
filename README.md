@@ -9,15 +9,15 @@ Run it: java -jar target/jdbcTestOracle.jar
 
 ### Command line options
 
-`usage: java -jar jdbcTest.jar [-h] [-n <userName>] [-u <URL>]`
+`usage: java -jar jdbcTest.jar [-h] [-n <userName>] [-u <URL>]
 
-`Test JDBC connections`
+Test JDBC connections
 
- `-h,--help                  Show this help`
- `-n,--username <userName>   Database user name`
- `-u,--url <URL>             URL to test`
+  -h,--help                  Show this help
+  -n,--username <userName>   Database user name
+  -u,--url <URL>             URL to test
 
-`Example:`
+Example:
 
-`java -jar jdbcTestOracle.jar -u jdbc:oracle:thin:@ldap://my.server.com:456/dbname,cn=MyContext,dc=organization,dc=domain`
+  java -jar jdbcTestOracle.jar -u jdbc:oracle:thin:@ldap://my.server.com:456/dbname,cn=MyContext,dc=organization,dc=domain`
 
