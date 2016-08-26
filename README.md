@@ -15,6 +15,8 @@ mvn clean package
 java -jar target/jdbcTestOracle.jar
 ```
 
+You can include the username and connection URL on the command line. If you don't include them on the command line, you will be prompted for them. You will always be prompted for the password. 
+
 **Command line options:**
 
 ```
