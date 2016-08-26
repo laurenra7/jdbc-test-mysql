@@ -1,4 +1,4 @@
-package org.lra.test.jdbc.oracle;
+package org.lra.test.jdbc;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -7,13 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.lra.test.jdbc.DBConnection;
-
 /**
- * Created by laurenra on 8/23/16.
+ * Created by laurenra on 8/19/14.
  */
-public class oracleConnection implements DBConnection {
+public class mysqlConnection implements DBConnection {
 
+    private String testSqlStatement = "select version()";
     private Connection connection = null;
     private long startTimeNano;
 
@@ -34,14 +33,14 @@ public class oracleConnection implements DBConnection {
 
         // Load the JDBC driver
         try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-        } catch (ClassNotFoundException e) {
+            Class.forName("com.mysql.jdbc.Driver");
+        }
+        catch (ClassNotFoundException e) {
             System.out.println("ERROR: can't find driver " + e.getMessage());
             return false;
         }
 
-        System.out.println("Oracle JDBC driver registered.");
-
+        System.out.println("MySQL JDBC driver registered."); // testing only
 
         // Set up connection pool to database and get connection
         // using BoneCP 0.8 because it's fast (http://www.jolbox.com/)
@@ -60,7 +59,8 @@ public class oracleConnection implements DBConnection {
 //            connectionPool = new BoneCP(config);
 //            connection = connectionPool.getConnection();
             System.out.println("getConnection - elapsed seconds: " + getElapsedSeconds(startTimeNano));
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             System.out.println("getConnection FAIL - elapsed seconds: " + getElapsedSeconds(startTimeNano));
             System.out.println("Connection failed. Check output console.");
             e.printStackTrace();
@@ -83,10 +83,11 @@ public class oracleConnection implements DBConnection {
         try {
             Statement statement = connection.createStatement();
             startTimeNano = System.nanoTime();
-            ResultSet resultSet = statement.executeQuery("select sysdate from dual");
+            ResultSet resultSet = statement.executeQuery(testSqlStatement);
             System.out.println("executeQuery - elapsed seconds: " + getElapsedSeconds(startTimeNano));
+            System.out.println("Test SQL statement: " + testSqlStatement);
             while(resultSet.next()) {
-                System.out.println("sysdate: " + resultSet.getString("sysdate"));
+                System.out.println("Test SQL result: " + resultSet.getString("version()"));
             }
         } catch (SQLException e) {
             System.out.println("executeQuery FAIL - elapsed seconds: " + getElapsedSeconds(startTimeNano));

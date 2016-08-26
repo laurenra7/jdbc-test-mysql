@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.lra.test</groupId>
-    <artifactId>jdbc-test-oracle</artifactId>
+    <artifactId>jdbc-test-mysql</artifactId>
     <version>1.0.0</version>
 
     <properties>
@@ -16,17 +16,11 @@
     </properties>
 
     <dependencies>
-        <!--<dependency>-->
-            <!--<groupId>mysql</groupId>-->
-            <!--<artifactId>mysql-connector-java</artifactId>-->
-            <!--<version>5.1.31</version>-->
-        <!--</dependency>-->
-
-        <!-- JDBC Driver (Oracle) -->
+        <!-- JDBC Driver (MySQL) -->
         <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc6</artifactId>
-            <version>11.2.0.3.0</version>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.31</version>
         </dependency>
 
         <!-- Database pool (http://www.jolbox.com/)-->
@@ -42,28 +36,6 @@
             <artifactId>commons-cli</artifactId>
             <version>${apache.cli.version}</version>
         </dependency>
-
-        <!-- Logging -->
-        <!--<dependency>-->
-            <!--<groupId>log4j</groupId>-->
-            <!--<artifactId>log4j</artifactId>-->
-            <!--<version>${log4j.version}</version>-->
-            <!--<scope>compile</scope>-->
-        <!--</dependency>-->
-
-        <!--<dependency>-->
-            <!--<groupId>org.slf4j</groupId>-->
-            <!--<artifactId>slf4j-log4j12</artifactId>-->
-            <!--<version>${slf4j.version}</version>-->
-            <!--<scope>compile</scope>-->
-        <!--</dependency>-->
-
-        <!--<dependency>-->
-            <!--<groupId>org.slf4j</groupId>-->
-            <!--<artifactId>jcl-over-slf4j</artifactId>-->
-            <!--<version>${slf4j.version}</version>-->
-            <!--<scope>compile</scope>-->
-        <!--</dependency>-->
 
     </dependencies>
 
@@ -90,7 +62,7 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
-                    <finalName>jdbcTestOracle</finalName>
+                    <finalName>jdbcTestMySql</finalName>
                     <appendAssemblyId>false</appendAssemblyId>
                     <archive>
                         <manifest>

@@ -1,7 +1,7 @@
 # jdbcTest
-Test JDBC connection using Oracle JDBC driver.
+Test JDBC connection using MySQL JDBC driver.
 
-See pom.xml for what driver version is used. Currently OJDBC6 version 11.2.0.3.0.
+See pom.xml for what driver version is used. Currently mysql-connector-java version 5.1.31.
 
 **Build it:** 
 
@@ -12,7 +12,7 @@ mvn clean package
 **Run it:**
 
 ```shell
-java -jar target/jdbcTestOracle.jar
+java -jar target/jdbcTestMySql.jar
 ```
 
 You can include the username and connection URL on the command line. If you don't include them on the command line, you will be prompted for them. You will always be prompted for the password. 
@@ -20,7 +20,7 @@ You can include the username and connection URL on the command line. If you don'
 **Command line options:**
 
 ```
-usage: java -jar jdbcTest.jar [-h] [-n <userName>] [-u <URL>]
+usage: java -jar jdbcTestMySql.jar [-h] [-n <userName>] [-u <URL>]
 
 Test JDBC connections
 
@@ -30,8 +30,6 @@ Test JDBC connections
 
 Example:
 
-  java -jar jdbcTestOracle.jar -u jdbc:oracle:thin:@ldap://my.server.com:456/dbname,cn=MyContext,dc=organization,dc=domain
+  java -jar jdbcTestMySql.jar -u jdbc:mysql://hostname:port/dbname
 ```
 
-## Notes
-Includes MySQL code, but not used yet.  Will probably break this up into separate modules.

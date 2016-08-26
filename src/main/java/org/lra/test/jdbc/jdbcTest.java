@@ -2,15 +2,9 @@ package org.lra.test.jdbc;
 
 import java.io.Console;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Enumeration;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -19,7 +13,6 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.lra.test.jdbc.oracle.oracleConnection;
 
 /**
  * Created by laurenra on 8/19/14.
@@ -62,12 +55,6 @@ public class jdbcTest {
                 .hasArg()
                 .argName("userName")
                 .build());
-//        commandLineOptions.addOption(Option.builder("p")
-//                .longOpt("driverpath")
-//                .desc("Path to database driver .jar file")
-//                .hasArg()
-//                .argName("driverPath")
-//                .build());
 
         if(args.length == 0) {
             showCommandHelp(commandLineOptions);
@@ -80,14 +67,6 @@ public class jdbcTest {
                     showCommandHelp(commandLineOptions);
                 }
                 else {
-                    // Get database driver .jar file path
-//                    if (line.hasOption("driverpath")) {
-//                        dbDriverPath = line.getOptionValue("driverpath");
-//                    }
-//                    else {
-//                        dbDriverPath = console.readLine("Path to DB driver .jar file: ");
-//                    }
-
                     // Get database URL
                     if (line.hasOption("url")) {
                         dbUrl = line.getOptionValue("url");
@@ -107,11 +86,6 @@ public class jdbcTest {
                     // Get password, don't show on command line
                     char[] enterPassword = console.readPassword("Password: ");
                     String dbPassword = new String(enterPassword);
-
-                    // Get driver .jar file and load classes.
-//                    if (!loadJDBCDriver(dbDriverPath)) {
-//                        System.exit(1);
-//                    }
 
                     // Run JDBC connection test.
                     if (!testJDBCConnection(dbUrl, dbUser, dbPassword)) {
@@ -133,76 +107,16 @@ public class jdbcTest {
     private static void showCommandHelp(Options options) {
         String commandHelpHeader = "\nTest JDBC connections\n\n";
         String commandHelpFooter = "\nExample:\n\n" +
-                "  java -jar jdbcTestOracle.jar -u jdbc:oracle:thin:@ldap://my.server.com:456/dbname,cn=MyContext,dc=organization,dc=domain\n\n";
+                "  java -jar jdbcTestMySql.jar -u jdbc:mysql://hostname:port/dbname\n\n";
 
         HelpFormatter helpFormatter = new HelpFormatter();
-        helpFormatter.printHelp("java -jar jdbcTest.jar", commandHelpHeader, options, commandHelpFooter, true);
-    }
-
-    private static boolean loadJDBCDriver(String pathToJar) {
-        JarFile jarFile = null;
-        try {
-            jarFile = new JarFile(pathToJar);
-        } catch (IOException e) {
-            System.err.println("ERROR: jar file not found in path " + pathToJar);
-            e.printStackTrace();
-            return false;
-        }
-
-        Enumeration<JarEntry> e = jarFile.entries();
-
-        try {
-            URL[] urls = { new URL("jar:file:" + pathToJar + "!/") };
-            URLClassLoader cl = URLClassLoader.newInstance(urls);
-
-            while (e.hasMoreElements()) {
-                JarEntry je = e.nextElement();
-                System.out.println(je.getName()); // testing only
-                if (je.isDirectory() || !je.getName().endsWith(".class")) {
-                    System.out.println("...skipped"); // testing only
-                    continue;
-                }
-
-                // -6 to trim ".class" off the end
-                String className = je.getName().substring(0, je.getName().length() - 6);
-                className = className.replace('/', '.');
-                System.out.println("Loading class " + className + " ..."); // testing only
-
-                try {
-                    cl.loadClass(className);
-                } catch (ClassNotFoundException e1) {
-                    e1.printStackTrace();
-                }
-            }
-
-        } catch (MalformedURLException e1) {
-            System.err.println("ERROR: malformed URL.");
-            e1.printStackTrace();
-            return false;
-        }
-
-        return true;
+        helpFormatter.printHelp("java -jar jdbcTestMySql.jar", commandHelpHeader, options, commandHelpFooter, true);
     }
 
     private static boolean testJDBCConnection(String dbUrl, String dbUser, String dbPassword) {
 
         boolean returnValue = true;
-        DBConnection dbConnection = new oracleConnection();
-
-//        DBConnection dbConnection = null;
-
-        // Connect to database using connection pool.
-//        switch (dbType.toLowerCase()) {
-//            case DBType.MYSQL:
-//                dbConnection = new mysqlConnection();
-//                break;
-//            case DBType.ORACLE:
-//                dbConnection = new oracleConnection();
-//                break;
-//            default:
-//                System.err.println("Invalid database type. Try mysql or oracle.");
-//                return false;
-//        }
+        DBConnection dbConnection = new mysqlConnection();
 
         if (dbConnection.openConnection(dbUrl, dbUser, dbPassword)) {
             System.out.println("Running test SQL on database..."); // testing only
