@@ -118,5 +118,4 @@ public class oracleConnection implements DBConnection {
         return elapsedNanoSecs.scaleByPowerOfTen(-9);
     }
 
-
 }

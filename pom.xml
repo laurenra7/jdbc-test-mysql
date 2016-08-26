@@ -30,11 +30,11 @@
         </dependency>
 
         <!-- Database pool (http://www.jolbox.com/)-->
-        <dependency>
-            <groupId>com.jolbox</groupId>
-            <artifactId>bonecp</artifactId>
-            <version>0.8.0.RELEASE</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.jolbox</groupId>-->
+            <!--<artifactId>bonecp</artifactId>-->
+            <!--<version>0.8.0.RELEASE</version>-->
+        <!--</dependency>-->
 
         <!-- Command line options parser -->
         <dependency>
