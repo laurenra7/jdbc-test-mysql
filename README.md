@@ -1,7 +1,7 @@
 # jdbcTest
 Test JDBC connection using MySQL JDBC driver.
 
-See pom.xml for what driver version is used. Currently mysql-connector-java version 5.1.31.
+See pom.xml for what driver version is used. Using **mysql-connector-java** version **5.1.31** currently.
 
 **Build it:** 
 
@@ -22,7 +22,7 @@ You can include the username and connection URL on the command line. If you don'
 ```
 usage: java -jar jdbcTestMySql.jar [-h] [-n <userName>] [-u <URL>]
 
-Test JDBC connections
+Test JDBC connection with MySql driver
 
   -h,--help                  Show this help
   -n,--username <userName>   Database user name

@@ -2,9 +2,6 @@ package org.lra.test.jdbc;
 
 import java.io.Console;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -20,16 +17,8 @@ import org.apache.commons.cli.ParseException;
 public class jdbcTest {
     public static void main(String[] args) throws IOException {
 
-        String dbDriverPath = null;
-//        String dbType = null;
         String dbUrl = null;
         String dbUser = null;
-
-        String username;
-        String password;
-        Connection connection;
-        Statement statement;
-        ResultSet resultSet;
 
         // Get a console to run from the command line.
         Console console = System.console();
@@ -105,7 +94,7 @@ public class jdbcTest {
     }
 
     private static void showCommandHelp(Options options) {
-        String commandHelpHeader = "\nTest JDBC connections\n\n";
+        String commandHelpHeader = "\nTest JDBC connection with MySql driver\n\n";
         String commandHelpFooter = "\nExample:\n\n" +
                 "  java -jar jdbcTestMySql.jar -u jdbc:mysql://hostname:port/dbname\n\n";
 

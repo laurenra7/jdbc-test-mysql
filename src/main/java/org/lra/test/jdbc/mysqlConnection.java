@@ -40,7 +40,7 @@ public class mysqlConnection implements DBConnection {
             return false;
         }
 
-        System.out.println("MySQL JDBC driver registered."); // testing only
+        System.out.println("MySQL JDBC driver registered.");
 
         // Set up connection pool to database and get connection
         // using BoneCP 0.8 because it's fast (http://www.jolbox.com/)
@@ -89,7 +89,8 @@ public class mysqlConnection implements DBConnection {
             while(resultSet.next()) {
                 System.out.println("Test SQL result: " + resultSet.getString("version()"));
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             System.out.println("executeQuery FAIL - elapsed seconds: " + getElapsedSeconds(startTimeNano));
             System.out.println("ERROR: did not execute SQL statement.");
             System.out.println(e.getMessage());
