@@ -1,0 +1,2 @@
+# jdbcTest
+Test JDBC connection.
