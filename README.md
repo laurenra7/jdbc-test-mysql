@@ -7,9 +7,9 @@ Build it: mvn clean package
 
 Run it: java -jar target/jdbcTestOracle.jar
 
-## Command line options
+#### Command line options
 
-usage: java -jar jdbcTest.jar [-h] [-n <userName>] [-u <URL>]
+usage: java -jar jdbcTest.jar [-h] [-n &lt;userName&gt;] [-u &lt;URL&gt;]
 
 Test JDBC connections
 
