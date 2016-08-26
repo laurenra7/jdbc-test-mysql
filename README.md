@@ -15,7 +15,7 @@ mvn clean package
 java -jar target/jdbcTestOracle.jar
 ```
 
-### Command line options
+**Command line options:**
 
 ```
 usage: java -jar jdbcTest.jar [-h] [-n <userName>] [-u <URL>]
