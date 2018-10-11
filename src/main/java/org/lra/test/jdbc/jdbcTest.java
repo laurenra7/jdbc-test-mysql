@@ -1,15 +1,9 @@
 package org.lra.test.jdbc;
 
+import org.apache.commons.cli.*;
+
 import java.io.Console;
 import java.io.IOException;
-
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
 
 /**
  * Created by laurenra on 8/19/14.
@@ -19,12 +13,13 @@ public class jdbcTest {
 
         String dbUrl = null;
         String dbUser = null;
+        String dbPassword = null;
 
         // Get a console to run from the command line.
         Console console = System.console();
         if (console == null) {
             System.err.println("No console");
-            System.exit(1);
+//            System.exit(1);
         }
 
         Options commandLineOptions = new Options();
@@ -43,6 +38,12 @@ public class jdbcTest {
                 .desc("Database user name")
                 .hasArg()
                 .argName("userName")
+                .build());
+        commandLineOptions.addOption(Option.builder("p")
+                .longOpt("password")
+                .desc("Database user password")
+                .hasArg()
+                .argName("password")
                 .build());
 
         if(args.length == 0) {
@@ -72,9 +73,16 @@ public class jdbcTest {
                         dbUser = console.readLine("User name: ");
                     }
 
-                    // Get password, don't show on command line
-                    char[] enterPassword = console.readPassword("Password: ");
-                    String dbPassword = new String(enterPassword);
+                    // Get password if passed in as argument
+                    if (line.hasOption("password")) {
+                        dbPassword = line.getOptionValue("password");
+                    }
+                    else {
+                        // Get password, don't show on command line
+                        char[] enterPassword = console.readPassword("Password: ");
+                        dbPassword = new String(enterPassword);
+                    }
+
 
                     // Run JDBC connection test.
                     if (!testJDBCConnection(dbUrl, dbUser, dbPassword)) {
